@@ -55,7 +55,6 @@ In your settings.py, add 'rest_framework' and configure the authentication setti
 Add 'rest_framework' to INSTALLED_APPS:
 
 python
-Copier le code
 INSTALLED_APPS = [
     ...
     'rest_framework',
@@ -63,7 +62,6 @@ INSTALLED_APPS = [
 Add the following configuration for JWT authentication:
 
 python
-Copier le code
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework_simplejwt.authentication.JWTAuthentication',
@@ -76,7 +74,6 @@ Step 3: Add Authentication URLs
 In your urls.py, include the routes for obtaining and refreshing JWT tokens:
 
 python
-Copier le code
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 urlpatterns = [
@@ -90,7 +87,6 @@ To secure your API endpoints, use the IsAuthenticated permission class. This wil
 Example:
 
 python
-Copier le code
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -106,12 +102,10 @@ Get the JWT Token:
 To authenticate a user and obtain a JWT token, send a POST request to the /api/token/ endpoint with your username and password:
 
 bash
-Copier le code
 curl -X POST -d "username=<your-username>&password=<your-password>" http://127.0.0.1:8000/api/token/
 The response will include both an access token and a refresh token:
 
 json
-Copier le code
 {
     "access": "<your-access-token>",
     "refresh": "<your-refresh-token>"
@@ -120,13 +114,11 @@ Use the Access Token:
 Once you have the access token, you can include it in the Authorization header for protected API requests:
 
 bash
-Copier le code
 Authorization: Bearer <your-access-token>
 Step 6: Refreshing the JWT Token
 If the access token expires, you can refresh it by sending a POST request to the /api/token/refresh/ endpoint with your refresh token:
 
 bash
-Copier le code
 curl -X POST -d "refresh=<your-refresh-token>" http://127.0.0.1:8000/api/token/refresh/
 This will return a new access token.
 
@@ -137,7 +129,6 @@ Example API Call:
 To get a protected list of posts, use the following curl command with the token:
 
 bash
-Copier le code
 curl -H "Authorization: Bearer <your-access-token>" http://127.0.0.1:8000/api/posts/
 This will return the list of posts, provided the token is valid.
 
@@ -146,13 +137,3 @@ This setup ensures that only authenticated users can access the protected API en
 
 License
 This project is licensed under the MIT License - see the LICENSE file for details.
-
-vbnet
-Copier le code
-
-### Instructions for Usage:
-1. Copy this content into a `README.md` file in your GitHub repository.
-2. Make sure to replace the placeholder text (like `<your-username>`, `<your-password>`, etc.) with actual values where needed.
-3. Commit the changes to your repository.
-
-This file provides a clear explanation of the authentication setup and testing ste
