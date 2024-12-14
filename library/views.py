@@ -3,6 +3,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from .models import Book, User
 from .serializers import BookSerializer, UserSerializer
+from rest_framework.permissions import IsAuthenticated
 
 class BookListView(APIView):
     def get(self, request):
@@ -17,3 +18,10 @@ class UserCreateView(APIView):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class PostList(APIView):
+    permission_classes = [IsAuthenticated]  # Ensures the user is authenticated
+
+    def get(self, request):
+        # Your view logic here
+        return Response({"message": "This is a protected post."})
